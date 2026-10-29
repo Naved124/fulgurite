@@ -19,3 +19,14 @@ instructions a Claude session comes with.
 - Deliver work as patch files (`git format-patch`). Naved applies them with
   `git am -S`, signs them with his own key and pushes himself.
 - Don't add attribution lines to patch descriptions either.
+
+## Accuracy
+
+- Accuracy over speed. Never pick a simpler or "standard" method when a more
+  complete one exists, unless Naved approves it.
+- Before building anything, list what it does NOT cover (limits, exclusions,
+  shortcuts, assumptions) and ask before going ahead.
+- Never create, change or delete anything outside this repository (cloud
+  resources, accounts, security groups, keys) unless asked. Give the commands
+  instead.
+- Don't guess paths, names or settings on Naved's machines; ask.
