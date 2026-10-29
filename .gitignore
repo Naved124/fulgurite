@@ -1,0 +1,37 @@
+# Rust
+/target/
+**/*.rs.bk
+
+# Frontend
+node_modules/
+dist/
+
+# Fulgurite project caches (regenerable)
+*.fulg/cache/
+
+# Corpus and samples: never commit binaries or malware
+/corpus/samples/
+/corpus/quarantine/
+*.exe
+*.dll
+*.so
+*.o
+
+# Fuzzing artefacts
+/fuzz/target/
+/fuzz/target-arm64/
+/fuzz/corpus/
+/fuzz/artifacts/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# local fuzzing runs
+fuzz/*.log
+fuzz/*.started
+
+# Python bytecode (tools/arm64)
+__pycache__/
+fuzz-*.log

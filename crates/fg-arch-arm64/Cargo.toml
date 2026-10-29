@@ -1,0 +1,16 @@
+[package]
+name = "fg-arch-arm64"
+description = "Fulgurite's AArch64 module: a decoder and formatter generated from Arm's machine-readable specification, behind the Arch trait."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+fg-core.workspace = true
+fg-ir.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,15 @@
+[package]
+name = "fg-core"
+description = "Fulgurite foundation types: addresses, byte spans, bounds-checked byte access, anomalies, evidence."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+serde.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,17 @@
+[package]
+name = "fg-arch-x86"
+description = "Fulgurite's x86 and x86-64 module: decoding and formatting through iced-x86, behind the Arch trait."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+fg-core.workspace = true
+fg-ir.workspace = true
+iced-x86 = { version = "1.21", default-features = false, features = ["std", "decoder", "intel", "gas", "instr_info"] }
+
+[lints]
+workspace = true

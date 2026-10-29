@@ -1,0 +1,51 @@
+# Coverage-guided fuzzing with cargo-fuzz (needs a nightly toolchain):
+#   cargo install cargo-fuzz
+#   cargo +nightly fuzz run load      # loaders
+#   cargo +nightly fuzz run disasm    # decoder and listing
+#   cargo +nightly fuzz run functions # function recovery (seeds, CFG, no-return, jump tables)
+#   cargo +nightly fuzz run xrefs     # cross-references
+# Seed corpora: tools/fuzz/seeds.sh
+# Kept out of the main workspace so stable builds never depend on it.
+[package]
+name = "fulgurite-fuzz"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+fg-loader = { path = "../crates/fg-loader" }
+fg-service = { path = "../crates/fg-service" }
+
+[[bin]]
+name = "load"
+path = "fuzz_targets/load.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "disasm"
+path = "fuzz_targets/disasm.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "functions"
+path = "fuzz_targets/functions.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "xrefs"
+path = "fuzz_targets/xrefs.rs"
+test = false
+doc = false
+bench = false
+
+[workspace]

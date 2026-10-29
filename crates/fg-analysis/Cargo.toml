@@ -1,0 +1,24 @@
+[package]
+name = "fg-analysis"
+description = "Fulgurite's analysis passes: seeds, CFG recovery and what builds on them. Every result is a fact with evidence."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+fg-core.workspace = true
+fg-loader.workspace = true
+fg-facts.workspace = true
+fg-ir.workspace = true
+serde.workspace = true
+
+[dev-dependencies]
+fg-store.workspace = true
+fg-arch-x86.workspace = true
+fg-arch-arm64.workspace = true
+
+[lints]
+workspace = true

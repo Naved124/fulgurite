@@ -1,0 +1,61 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  LLVM_VERSION: 23
+
+jobs:
+  check:
+    name: fmt, clippy, test, layers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          rustup toolchain install stable --profile minimal --component clippy,rustfmt
+          rustup default stable
+      - name: Format
+        run: cargo fmt --all --check
+      - name: Lint
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Docs
+        run: cargo doc --workspace --no-deps --locked
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: Oracle tools (MinGW for PE test images; LLVM and clang from apt.llvm.org)
+        # The same LLVM major version as development machines: llvm-mc's A64
+        # oracle needs it, and clang's code layout decides which CFG cases the
+        # recovery tests exercise.
+        run: |
+          codename=$(lsb_release -cs)
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc >/dev/null
+          echo "deb http://apt.llvm.org/$codename/ llvm-toolchain-$codename-$LLVM_VERSION main" | sudo tee /etc/apt/sources.list.d/llvm.list
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends mingw-w64 clang-$LLVM_VERSION llvm-$LLVM_VERSION lld-$LLVM_VERSION
+          echo "/usr/lib/llvm-$LLVM_VERSION/bin" >> "$GITHUB_PATH"
+      - name: Tool versions
+        run: clang --version && llvm-mc --version && gcc --version
+      - name: Test (includes readelf and llvm-readobj oracles)
+        run: cargo test --workspace --locked
+      - name: Layering
+        run: cargo xtask layers
+
+  msrv:
+    name: minimum supported Rust (1.88)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          rustup toolchain install 1.88 --profile minimal
+          rustup default 1.88
+      - name: Check
+        run: cargo check --workspace --all-targets --locked

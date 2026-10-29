@@ -1,0 +1,22 @@
+[package]
+name = "fg-service"
+description = "Fulgurite's public service layer: the one API that the CLI, GUI, Python bindings and daemon all call."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+repository.workspace = true
+
+[dependencies]
+fg-core.workspace = true
+fg-loader.workspace = true
+fg-ir.workspace = true
+fg-arch-x86.workspace = true
+fg-arch-arm64.workspace = true
+fg-facts.workspace = true
+fg-analysis.workspace = true
+serde.workspace = true
+
+[lints]
+workspace = true

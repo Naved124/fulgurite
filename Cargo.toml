@@ -1,0 +1,48 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/fg-core",
+    "crates/fg-loader",
+    "crates/fg-ir",
+    "crates/fg-facts",
+    "crates/fg-store",
+    "crates/fg-arch-x86",
+    "crates/fg-arch-arm64",
+    "crates/fg-analysis",
+    "crates/fg-service",
+    "crates/fg-cli",
+    "xtask",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "LicenseRef-Proprietary"
+publish = false
+repository = "https://github.com/Naved124/fulgurite"
+
+[workspace.dependencies]
+fg-core = { path = "crates/fg-core" }
+fg-loader = { path = "crates/fg-loader" }
+fg-ir = { path = "crates/fg-ir" }
+fg-facts = { path = "crates/fg-facts" }
+fg-store = { path = "crates/fg-store" }
+fg-arch-x86 = { path = "crates/fg-arch-x86" }
+fg-arch-arm64 = { path = "crates/fg-arch-arm64" }
+fg-analysis = { path = "crates/fg-analysis" }
+fg-service = { path = "crates/fg-service" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+clap = { version = "4", features = ["derive"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+debug = "line-tables-only"
