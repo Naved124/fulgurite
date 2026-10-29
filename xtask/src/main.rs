@@ -4,6 +4,11 @@
 //! (section 22.8): a crate may only depend on crates in a strictly lower layer.
 //! The table below is the single source of truth for crate layering; adding a
 //! crate to the workspace without adding it here fails the check.
+//!
+//! `cargo xtask measure CORPUS` scores function recovery against a corpus's
+//! true function lists (see `measure.rs`).
+
+mod measure;
 
 use std::collections::BTreeMap;
 use std::process::{Command, ExitCode};
@@ -32,10 +37,12 @@ const LAYERS: &[(&str, u32)] = &[
 const TOOLING: &[&str] = &["xtask"];
 
 fn main() -> ExitCode {
-    match std::env::args().nth(1).as_deref() {
+    let args: Vec<String> = std::env::args().skip(1).collect();
+    match args.first().map(String::as_str) {
         Some("layers") => layers(),
+        Some("measure") => measure::measure(&args[1..]),
         _ => {
-            eprintln!("usage: cargo xtask layers");
+            eprintln!("usage: cargo xtask layers | cargo xtask measure CORPUS");
             ExitCode::from(2)
         }
     }

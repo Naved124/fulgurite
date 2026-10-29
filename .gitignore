@@ -10,8 +10,7 @@ dist/
 *.fulg/cache/
 
 # Corpus and samples: never commit binaries or malware
-/corpus/samples/
-/corpus/quarantine/
+/corpus/
 *.exe
 *.dll
 *.so

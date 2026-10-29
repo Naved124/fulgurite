@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+### M1 step 8: measurement tools (2026-10-29)
+
+- `tools/measure/corpus.sh`: builds the function-recovery corpus from 12 pinned
+  open-source programs (GNU coreutils, grep, sed, diffutils, findutils, gawk, groff,
+  jq, SQLite, Lua as C and as C++, zlib, bzip2), Fulgurite's own `fulg` (Rust) and Go
+  distribution tools, in 36 configs: gcc and clang at every `-O` level, static, LTO,
+  no unwind tables, non-PIE, function sections, CET on and off, 32-bit, AArch64,
+  MinGW 32- and 64-bit PE. Every binary is kept stripped, unstripped, and with its
+  true function list read from the symbol table by binutils.
+- `cargo xtask measure CORPUS`: recall and precision of Fulgurite, IDA and Binary
+  Ninja against the true lists, per config, for the M1 gate (`gcc-O2`, `clang-O2`), and
+  Fulgurite against each other tool on the binaries both have.
+- `tools/measure/ida-export.sh` and `fulg_export.idc`: IDA Free's function lists,
+  unattended (Xvfb and xdotool drive the GUI; IDA Free has no batch mode).
+- `tools/measure/setup-ubuntu.sh`: everything above on a fresh Ubuntu 24.04 server.
+
 ### Fuzzing the analysis (2026-10-21)
 
 - New fuzz targets `functions` (seeds, `.eh_frame`, CFG, no-return, jump tables) and

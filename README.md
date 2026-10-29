@@ -29,7 +29,8 @@ M1:
 - Step 5 done: no-return analysis ([notes](docs/progress/m1-step5.md))
 - Step 6 done: jump tables, register values, AArch64 address pairs and PLT stubs ([notes](docs/progress/m1-step6.md))
 - Step 7 done: cross-references and `fulg xrefs` ([notes](docs/progress/m1-step7.md))
-- Step 8 next: the corpus measurement against IDA and Binary Ninja
+- Step 8 in progress: the corpus measurement against IDA and Binary Ninja; the tools are
+  ready, the full run is next ([notes](docs/progress/m1-step8.md))
 
 See [`CHANGELOG.md`](CHANGELOG.md).
 
@@ -72,6 +73,8 @@ cargo +nightly fuzz run disasm                          # fuzz the decoders and 
 cargo +nightly fuzz run functions                       # fuzz function recovery (seeds, CFG, no-return, tables)
 cargo +nightly fuzz run xrefs                           # fuzz cross-references
 tools/fuzz/seeds.sh                                     # rebuild the seed corpora in fuzz/corpus/
+tools/measure/corpus.sh corpus                          # build the measurement corpus with its true function lists
+cargo run --release -p xtask -- measure corpus          # score function recovery against them (and IDA's, Binary Ninja's)
 ```
 
 The oracle tests compare against `readelf` and, when installed, `checksec`; they
@@ -106,9 +109,10 @@ crates/fg-store     the analysis cache (SQLite)
 crates/fg-analysis  analysis passes: seeds, CFG and function recovery
 crates/fg-service   the one API every front end uses (incl. disassembly listings)
 crates/fg-cli       the `fulg` command
-xtask               repository tasks (layering check)
+xtask               repository tasks (layering check, function-recovery scoring)
 tools/arm64         generator of the AArch64 decoder tables
 tools/fuzz          seed corpora for the fuzz targets
+tools/measure       the measurement corpus, IDA Free export, server setup
 fuzz                libFuzzer targets
 docs                design document and progress notes
 ```

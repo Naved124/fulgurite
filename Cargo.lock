@@ -590,6 +590,7 @@ dependencies = [
 name = "xtask"
 version = "0.1.0"
 dependencies = [
+ "fg-service",
  "serde_json",
 ]
 
