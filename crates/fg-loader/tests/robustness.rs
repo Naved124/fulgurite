@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Mutation testing on real binaries: thousands of corrupted variants of a real
 //! ELF file must all load or fail cleanly, never panic.
 //!

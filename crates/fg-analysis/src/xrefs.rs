@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Cross-references (design §4.1 `Xref`): which instructions and data words
 //! refer to which addresses, and how.
 //!

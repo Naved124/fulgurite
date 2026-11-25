@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Anomalies: places where the input is malformed, unusual or deliberately
 //! misleading. Loaders report them instead of failing, because malware relies
 //! on exactly these quirks.

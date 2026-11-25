@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The analysis cache (design §5.1–§5.2): every fact the passes produced,
 //! persisted in SQLite so that reopening a binary does not re-run them.
 //!

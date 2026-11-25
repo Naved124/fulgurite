@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Section headers (`Elf32_Shdr` / `Elf64_Shdr`).
 //!
 //! Sections are metadata for linkers and debuggers; the OS loader ignores them.

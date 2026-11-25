@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! What an instruction does to registers and flags, in the few forms that M1's
 //! analyses follow a value through: jump tables (`lea`, `movsxd`, `add`,
 //! `jmp`; `adrp`, `ldrb`, `adr`, `add`, `br`), the bound check before them

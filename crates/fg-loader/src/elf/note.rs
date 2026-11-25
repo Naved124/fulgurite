@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Notes (`PT_NOTE` segments and `SHT_NOTE` sections): build ID, ABI tag, and
 //! GNU properties, which record the hardware control-flow protections (x86 CET
 //! IBT/SHSTK, AArch64 BTI/PAC) every linked object was compiled for.

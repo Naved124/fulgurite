@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Base relocations: the addresses the loader adjusts when the image cannot be
 //! loaded at its preferred base (always, under ASLR).
 

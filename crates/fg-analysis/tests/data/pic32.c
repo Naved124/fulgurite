@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 /* 32-bit position-independent code: globals reached from the GOT pointer
    (gcc sets it with __x86.get_pc_thunk.bx, clang with `call next; pop`). */
 int counter;

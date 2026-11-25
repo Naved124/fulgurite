@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! x86 and x86-64 for Fulgurite.
 //!
 //! Decoding and text formatting come from `iced-x86` (design §22.4: re-deriving

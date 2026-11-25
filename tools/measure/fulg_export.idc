@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 // Writes every function IDA found, one per line ("start end name"), to
 // <input file>.ida.txt next to the input, for cargo xtask measure. Run it
 // with File > Script file... (Alt+F7). tools/measure/ida-export.sh runs the

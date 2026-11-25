@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Repository maintenance tasks.
 //!
 //! `cargo xtask layers` enforces the architecture rule from the design document

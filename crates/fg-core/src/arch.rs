@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Architecture identifiers. Recognising an architecture does not mean it can be
 //! decoded yet; decoding support lives in the `fg-arch-*` crates.
 

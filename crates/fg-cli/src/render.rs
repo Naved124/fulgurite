@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Human-readable output. Every value is followed by `@offset`, the file bytes it
 //! came from, so any line of output can be checked against a hex dump.
 

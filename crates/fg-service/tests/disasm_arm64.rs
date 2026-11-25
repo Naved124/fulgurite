@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The disassembly listing on AArch64 files: ELF shared library (lazy PLT),
 //! static executable, object file and a PE32+ ARM64 DLL, built here with clang
 //! and the LLD linker Rust toolchains ship (`rust-lld`). Instruction addresses

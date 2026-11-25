@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The in-memory fact store: every fact, the resolution rules that pick what is
 //! shown (section 4.4), and the dependency graph that tells which facts must be
 //! recomputed when one changes (section 4.5).

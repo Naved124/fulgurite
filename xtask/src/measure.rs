@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! `cargo xtask measure CORPUS`: function-boundary precision and recall of
 //! Fulgurite, IDA and Binary Ninja against the corpus's true function lists
 //! (M1 step 8; `tools/measure/corpus.sh` builds the corpus).

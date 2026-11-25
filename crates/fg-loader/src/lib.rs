@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Binary loaders.
 //!
 //! A loader (ELF or PE) turns raw, untrusted bytes into a [`LoadedBinary`]: a format-neutral

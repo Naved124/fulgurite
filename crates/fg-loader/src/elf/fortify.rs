@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Functions glibc can replace with bounds-checked `__<name>_chk` variants under
 //! `_FORTIFY_SOURCE`. Generated from the `__*_chk` symbols exported by glibc 2.44
 //! (excluding `__stack_chk_*`, which belongs to the stack protector).

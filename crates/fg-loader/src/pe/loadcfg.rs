@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! TLS directory and load-configuration directory (security cookie, Control
 //! Flow Guard tables, SafeSEH handlers).
 

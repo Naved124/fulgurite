@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 # Installs what the M1 step 8 measurement needs on a fresh Ubuntu 24.04 server:
 # the compilers corpus.sh uses, Rust, and Xvfb and xdotool for ida-export.sh,
 # with the libraries IDA's Qt GUI loads. IDA Free itself is not here: install

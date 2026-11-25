@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Display tokens. Instructions are rendered as typed tokens rather than plain
 //! strings so front ends can colour them, link addresses and registers, and
 //! substitute names without re-parsing text.

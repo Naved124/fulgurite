@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Listing semantics on small binaries built here: labels, seeds, overlapping
 //! labels, invalid and cut-off bytes, operand names, PLT stub names, every
 //! target kind, object files, and the errors. Skipped (with a note) where gcc

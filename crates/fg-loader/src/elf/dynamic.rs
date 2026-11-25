@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The dynamic section, read through the `PT_DYNAMIC` program header.
 
 use fg_core::{Bitness, ByteView, Field};

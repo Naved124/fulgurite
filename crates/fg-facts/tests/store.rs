@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The resolution rules (design document, section 4.4) and invalidation through
 //! the dependency graph (section 4.5).
 

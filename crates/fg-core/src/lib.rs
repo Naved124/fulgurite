@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Foundation types shared by every Fulgurite crate.
 //!
 //! Nothing here knows about any file format or architecture. The types exist so

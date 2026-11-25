@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! AArch64 (ARM64) for Fulgurite.
 //!
 //! The decoder is generated from Arm's machine-readable specification (design

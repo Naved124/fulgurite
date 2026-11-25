@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 # Exports IDA Free's function list for many binaries, several IDAs at once,
 # with nobody at the keyboard. IDA Free has no batch mode (-A) and no command-line
 # scripts (-S), so each binary is opened in the GUI on an invisible X screen

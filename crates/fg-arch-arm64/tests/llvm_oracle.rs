@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Cross-checks the decoder against LLVM's disassembler (`llvm-mc`).
 //!
 //! Words: pseudo-random 32-bit values (a uniform sample of the encoding space)

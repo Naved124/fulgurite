@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! What instructions do to registers: the jump-table and address-pair forms
 //! exactly, and what anything else writes.
 

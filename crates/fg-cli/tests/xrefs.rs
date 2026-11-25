@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! `fulg xrefs` on the `fulg` executable itself.
 
 use std::process::Command;

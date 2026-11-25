@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Section headers and the image map: how the Windows loader places file bytes
 //! in memory, which every RVA lookup goes through.
 

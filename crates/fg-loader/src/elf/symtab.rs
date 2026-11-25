@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Symbol tables (`.symtab`, `.dynsym`) and GNU symbol versioning.
 //!
 //! The dynamic symbol table is located two ways:

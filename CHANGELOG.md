@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Licence: Apache-2.0 (2026-11-25)
+
+- Fulgurite is now licensed under the Apache License, Version 2.0 (`LICENSE`), with a
+  `NOTICE` file. It was proprietary before.
+- `fg-arch-arm64` is `Apache-2.0 AND BSD-3-Clause`: its generated tables keep the
+  BSD-3-Clause notice of Arm's Machine Readable Specification.
+- Every source file carries SPDX headers (`SPDX-FileCopyrightText`,
+  `SPDX-License-Identifier`); `tools/arm64/gen.py` writes them into the tables it
+  generates.
+- `CITATION.cff` with the author's ORCID, for GitHub's "Cite this repository".
+
 ### M1 step 8: measurement tools (2026-10-29)
 
 - `tools/measure/corpus.sh`: builds the function-recovery corpus from 12 pinned

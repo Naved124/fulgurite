@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 [workspace]
 resolver = "3"
 members = [
@@ -18,7 +21,7 @@ members = [
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
-license = "LicenseRef-Proprietary"
+license = "Apache-2.0"
 publish = false
 repository = "https://github.com/Naved124/fulgurite"
 

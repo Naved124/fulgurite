@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The ELF file header (`Elf32_Ehdr` / `Elf64_Ehdr`).
 
 use fg_core::{Bitness, ByteView, Field, OutOfBounds};

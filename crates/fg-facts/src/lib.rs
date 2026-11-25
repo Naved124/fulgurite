@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Fulgurite's fact model.
 //!
 //! Everything the analysis concludes is a [`Fact`]: a [`Claim`] about the

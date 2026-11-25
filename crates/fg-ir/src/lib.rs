@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Fulgurite's intermediate representation.
 //!
 //! Today this crate holds the architecture-neutral view of a decoded machine

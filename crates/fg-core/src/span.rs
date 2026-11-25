@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Provenance down to the byte: every parsed value can remember exactly which
 //! bytes of the input file it was read from.
 

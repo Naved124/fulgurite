@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Text rendering of disassembly listings.
 
 use fg_service::disasm::{InsnLine, Line};

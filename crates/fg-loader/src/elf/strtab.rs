@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! String tables: NUL-terminated names referenced by offset.
 
 use fg_core::{ByteView, Field, Span};

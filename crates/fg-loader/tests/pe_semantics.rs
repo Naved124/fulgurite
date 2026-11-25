@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! PE loader semantics on synthetic images: exact values, exact byte spans, and
 //! every mitigation verdict.
 
