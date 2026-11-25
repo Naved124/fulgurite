@@ -2,7 +2,6 @@
 
 ## Unreleased
 
-<<<<<<< HEAD
 ### Licence: Apache-2.0 (2026-11-25)
 
 - Fulgurite is now licensed under the Apache License, Version 2.0 (`LICENSE`), with a
@@ -13,7 +12,7 @@
   `SPDX-License-Identifier`); `tools/arm64/gen.py` writes them into the tables it
   generates.
 - `CITATION.cff` with the author's ORCID, for GitHub's "Cite this repository".
-=======
+
 ### Fixes (2026-11-25)
 
 - ELF section flags: `R` (`SHF_GNU_RETAIN`) was shown for every file. readelf
@@ -32,7 +31,6 @@
   oracle test checks a retained and an MBIND section under the System V, GNU,
   FreeBSD and Solaris OS/ABIs. Found by CI: Ubuntu 24.04's `/bin/cat` has a
   retained section.
->>>>>>> origin/main
 
 ### M1 step 8: measurement tools (2026-10-29)
 
