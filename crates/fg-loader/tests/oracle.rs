@@ -729,58 +729,104 @@ fn readelf_sections(path: &Path) -> Vec<ReadelfSection> {
     rows
 }
 
-fn sorted_chars(s: &str) -> Vec<char> {
-    let mut v: Vec<char> = s.chars().collect();
-    v.sort_unstable();
-    v
-}
-
 #[test]
 fn sections_match_readelf() {
     if !tool_available("readelf") {
         return;
     }
     for path in inputs() {
-        let bin = load_file(path);
-        let elf = bin.elf().unwrap();
-        let ctx = path.display();
-        let rows = readelf_sections(path);
-        assert_eq!(
-            elf.section_headers.len(),
-            rows.len(),
-            "{ctx}: section count"
-        );
-        let machine = elf.header.e_machine.value;
-        for (s, r) in elf.section_headers.iter().zip(&rows) {
-            assert_eq!(s.name_str(), r.name, "{ctx}: section #{} name", s.index);
-            if let Some(ty) = fg_loader::elf::consts::sh_type_name(s.sh_type.value, machine) {
-                assert_eq!(ty, r.ty, "{ctx}: section #{} type", s.index);
-            }
-            let ours = (
-                s.sh_addr.value,
-                s.sh_offset.value,
-                s.sh_size.value,
-                s.sh_entsize.value,
-                u64::from(s.sh_link.value),
-                u64::from(s.sh_info.value),
-                s.sh_addralign.value,
-            );
-            assert_eq!(ours, r.numbers, "{ctx}: section #{} numbers", s.index);
-            let letters = fg_loader::elf::consts::sh_flags_letters(s.sh_flags.value, machine)
-                .unwrap_or_else(|| {
-                    panic!(
-                        "{ctx}: section #{} has unnamed flag bits {:#x}",
-                        s.index, s.sh_flags.value
-                    )
-                });
-            assert_eq!(
-                sorted_chars(&letters),
-                sorted_chars(&r.flags),
-                "{ctx}: section #{} flags",
-                s.index
-            );
+        check_sections(path);
+    }
+}
+
+/// Every section header of `path` against `readelf -W -S`: name, type, numbers, and
+/// the flag letters with their order. Returns the OR of all section flags.
+fn check_sections(path: &Path) -> u64 {
+    let bin = load_file(path);
+    let elf = bin.elf().unwrap();
+    let ctx = path.display();
+    let rows = readelf_sections(path);
+    assert_eq!(
+        elf.section_headers.len(),
+        rows.len(),
+        "{ctx}: section count"
+    );
+    let machine = elf.header.e_machine.value;
+    let osabi = elf.header.ident.osabi.value;
+    let mut all_flags = 0;
+    for (s, r) in elf.section_headers.iter().zip(&rows) {
+        assert_eq!(s.name_str(), r.name, "{ctx}: section #{} name", s.index);
+        if let Some(ty) = fg_loader::elf::consts::sh_type_name(s.sh_type.value, machine) {
+            assert_eq!(ty, r.ty, "{ctx}: section #{} type", s.index);
         }
-        eprintln!("ok  sections {ctx}  ({} sections)", rows.len());
+        let ours = (
+            s.sh_addr.value,
+            s.sh_offset.value,
+            s.sh_size.value,
+            s.sh_entsize.value,
+            u64::from(s.sh_link.value),
+            u64::from(s.sh_info.value),
+            s.sh_addralign.value,
+        );
+        assert_eq!(ours, r.numbers, "{ctx}: section #{} numbers", s.index);
+        let letters = fg_loader::elf::consts::sh_flags_letters(s.sh_flags.value, machine, osabi);
+        assert_eq!(
+            letters, r.flags,
+            "{ctx}: section #{} flags {:#x}",
+            s.index, s.sh_flags.value
+        );
+        all_flags |= s.sh_flags.value;
+    }
+    eprintln!("ok  sections {ctx}  ({} sections)", rows.len());
+    all_flags
+}
+
+/// A retained section and an MBIND section: readelf names those flags only for some
+/// `EI_OSABI` values (`R` for GNU and FreeBSD, `D` for those and System V, `o`
+/// otherwise), so one object is checked with each value. Ubuntu's own binaries are
+/// System V files with retained sections.
+const OS_SPECIFIC_FLAGS: &str = "__attribute__((used, retain)) static int kept = 1;\n\
+__asm__(\".section .mbind.data,\\\"awd\\\",%progbits,1\\n.byte 1\\n.previous\\n\");\n\
+int f(void) { return kept; }\n";
+
+#[test]
+fn os_specific_section_flags_match_readelf() {
+    use fg_loader::elf::consts::{SHF_GNU_MBIND, SHF_GNU_RETAIN};
+    if !tool_available("readelf") || !tool_available("gcc") {
+        eprintln!("note: readelf or gcc not found; skipped");
+        return;
+    }
+    let dir = PathBuf::from(env!("CARGO_TARGET_TMPDIR")).join("oracle-osabi");
+    std::fs::create_dir_all(&dir).unwrap();
+    let c = dir.join("flags.c");
+    std::fs::write(&c, OS_SPECIFIC_FLAGS).unwrap();
+    let object = dir.join("flags.o");
+    let built = Command::new("gcc")
+        .arg("-c")
+        .arg(&c)
+        .arg("-o")
+        .arg(&object)
+        .output()
+        .unwrap();
+    assert!(
+        built.status.success(),
+        "gcc could not build the retain/mbind object (needs gcc 11 and binutils 2.36 or newer):\n{}",
+        String::from_utf8_lossy(&built.stderr)
+    );
+    let bytes = std::fs::read(&object).unwrap();
+    // System V, GNU, FreeBSD, Solaris.
+    for osabi in [0u8, 3, 9, 6] {
+        let mut copy = bytes.clone();
+        copy[fg_loader::elf::consts::EI_OSABI as usize] = osabi;
+        let path = dir.join(format!("flags-osabi{osabi}.o"));
+        std::fs::write(&path, &copy).unwrap();
+        let all = check_sections(&path);
+        // Without both flags the comparison would prove nothing.
+        assert!(
+            all & SHF_GNU_RETAIN != 0 && all & SHF_GNU_MBIND != 0,
+            "{}: the object has no retained or no MBIND section",
+            path.display()
+        );
     }
 }
 

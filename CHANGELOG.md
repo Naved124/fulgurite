@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+### Fixes (2026-11-25)
+
+- ELF section flags: `R` (`SHF_GNU_RETAIN`) was shown for every file. readelf
+  names it only when `EI_OSABI` is GNU or FreeBSD; for System V files (Ubuntu's own
+  binaries) the bit is an OS-specific `o`. `sh_flags_letters` now follows readelf's
+  rules exactly, taken from binutils' `get_elf_section_flags`: the file's OS/ABI,
+  `D` for `SHF_GNU_MBIND`, `y` (ARM) and `v` (PowerPC), one `o` or `p` for a whole
+  OS or processor range, `x` for other bits, and readelf's order. It no longer
+  returns `None`.
+- `fulg sections` ends a row with the raw flags value when its letters include
+  `o`, `p` or `x`, which do not say which bit was set (it printed only the raw
+  value before, in place of the letters). The legend lists every letter, and `O`
+  is now described as readelf does ("extra OS processing required"), not as
+  "OS-specific".
+- The readelf oracle compares flag letters exactly, order included, and a new
+  oracle test checks a retained and an MBIND section under the System V, GNU,
+  FreeBSD and Solaris OS/ABIs. Found by CI: Ubuntu 24.04's `/bin/cat` has a
+  retained section.
+
 ### M1 step 8: measurement tools (2026-10-29)
 
 - `tools/measure/corpus.sh`: builds the function-recovery corpus from 12 pinned

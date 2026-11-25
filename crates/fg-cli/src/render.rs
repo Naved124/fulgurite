@@ -347,6 +347,7 @@ pub fn sections(session: &Session) -> String {
         return o;
     }
     let machine = elf.header.e_machine.value;
+    let osabi = elf.header.ident.osabi.value;
     let _ = writeln!(
         o,
         "  {:>4}  {:<24} {:<14} {:<18} {:<10} {:<10} {:>2} {:<6} {:>3} {:>4} {:>3}  {:<10} Defined at",
@@ -367,8 +368,14 @@ pub fn sections(session: &Session) -> String {
         let ty = consts::sh_type_name(s.sh_type.value, machine)
             .map(str::to_string)
             .unwrap_or_else(|| format!("{:#x}", s.sh_type.value));
-        let flags = consts::sh_flags_letters(s.sh_flags.value, machine)
-            .unwrap_or_else(|| format!("{:#x}", s.sh_flags.value));
+        // readelf's letters. `o`, `p` and `x` do not say which bit was set, so the
+        // raw value is added at the end of the row.
+        let flags = consts::sh_flags_letters(s.sh_flags.value, machine, osabi);
+        let raw = if flags.contains(['o', 'p', 'x']) {
+            format!("  flags {:#x}", s.sh_flags.value)
+        } else {
+            String::new()
+        };
         let segment = if s.is_alloc() && s.sh_size.value > 0 {
             b.segments
                 .iter()
@@ -379,7 +386,7 @@ pub fn sections(session: &Session) -> String {
         };
         let _ = writeln!(
             o,
-            "  {:>4}  {:<24} {:<14} {:#018x} {:#010x} {:#010x} {:>2x} {:<6} {:>3} {:>4} {:>3}  {:<10} @{:#x}",
+            "  {:>4}  {:<24} {:<14} {:#018x} {:#010x} {:#010x} {:>2x} {:<6} {:>3} {:>4} {:>3}  {:<10} @{:#x}{}",
             s.index,
             s.name_str(),
             ty,
@@ -392,7 +399,8 @@ pub fn sections(session: &Session) -> String {
             s.sh_info.value,
             s.sh_addralign.value,
             segment,
-            s.span.offset.0
+            s.span.offset.0,
+            raw
         );
     }
     let _ = writeln!(
@@ -401,7 +409,15 @@ pub fn sections(session: &Session) -> String {
     );
     let _ = writeln!(
         o,
-        "       O OS-specific, G group, T TLS, C compressed, R retain, l large, E exclude"
+        "       O extra OS processing required, G group, T TLS, C compressed, E exclude,"
+    );
+    let _ = writeln!(
+        o,
+        "       R retain (GNU, FreeBSD), D mbind, l large (x86-64), y pure code (ARM), v VLE (PowerPC),"
+    );
+    let _ = writeln!(
+        o,
+        "       o OS-specific, p processor-specific, x unknown (the raw value ends the row)"
     );
     o
 }

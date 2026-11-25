@@ -22,10 +22,17 @@ pub const ET_DYN: u16 = 3;
 pub const ET_CORE: u16 = 4;
 
 pub const EM_386: u16 = 3;
+pub const EM_PPC: u16 = 20;
 pub const EM_ARM: u16 = 40;
 pub const EM_X86_64: u16 = 62;
+pub const EM_L1OM: u16 = 180;
+pub const EM_K1OM: u16 = 181;
 pub const EM_AARCH64: u16 = 183;
 pub const EM_RISCV: u16 = 243;
+
+pub const ELFOSABI_NONE: u8 = 0;
+pub const ELFOSABI_GNU: u8 = 3;
+pub const ELFOSABI_FREEBSD: u8 = 9;
 
 /// `e_phnum` value meaning "the real count is in section header 0's `sh_info`".
 pub const PN_XNUM: u16 = 0xffff;
@@ -153,8 +160,13 @@ pub const SHF_GROUP: u64 = 0x200;
 pub const SHF_TLS: u64 = 0x400;
 pub const SHF_COMPRESSED: u64 = 0x800;
 pub const SHF_GNU_RETAIN: u64 = 0x20_0000;
+pub const SHF_GNU_MBIND: u64 = 0x100_0000;
+pub const SHF_MASKOS: u64 = 0x0ff0_0000;
 pub const SHF_X86_64_LARGE: u64 = 0x1000_0000;
+pub const SHF_PPC_VLE: u64 = 0x1000_0000;
+pub const SHF_ARM_PURECODE: u64 = 0x2000_0000;
 pub const SHF_EXCLUDE: u64 = 0x8000_0000;
+pub const SHF_MASKPROC: u64 = 0xf000_0000;
 
 /// Section type name as `readelf -S` prints it, if known. Machine-specific types
 /// are only named for the machine that defines them.
@@ -189,37 +201,58 @@ pub fn sh_type_name(sh_type: u32, machine: u16) -> Option<&'static str> {
     })
 }
 
-/// Section flags as the letters `readelf -S` uses (W A X M S I L O G T C R l E).
-/// Returns `None` if a set bit has no letter here, so callers can tell.
-pub fn sh_flags_letters(flags: u64, machine: u16) -> Option<String> {
-    const LETTERS: &[(u64, char)] = &[
-        (SHF_WRITE, 'W'),
-        (SHF_ALLOC, 'A'),
-        (SHF_EXECINSTR, 'X'),
-        (SHF_MERGE, 'M'),
-        (SHF_STRINGS, 'S'),
-        (SHF_INFO_LINK, 'I'),
-        (SHF_LINK_ORDER, 'L'),
-        (SHF_OS_NONCONFORMING, 'O'),
-        (SHF_GROUP, 'G'),
-        (SHF_TLS, 'T'),
-        (SHF_COMPRESSED, 'C'),
-        (SHF_GNU_RETAIN, 'R'),
-        (SHF_EXCLUDE, 'E'),
-    ];
+/// Section flags as the letters `readelf -S` prints, by readelf's own rules
+/// (binutils `get_elf_section_flags`, the same from 2.42 to 2.47):
+///
+/// - bits are taken lowest first, one letter each: `W A X M S I L O G T C E`;
+/// - `l` (large) only on x86-64, `y` (pure code) only on ARM, `v` (VLE) only on
+///   PowerPC;
+/// - OS-specific bits depend on the file's `EI_OSABI`: `R` (`SHF_GNU_RETAIN`) only
+///   for GNU and FreeBSD, `D` (`SHF_GNU_MBIND`) for those and System V, because old
+///   GNU tools left `EI_OSABI` at 0. Any other OS-specific bit is one `o` for the
+///   whole OS range, and the rest of that range is not looked at;
+/// - processor-specific bits without a letter are one `p` for the whole range in the
+///   same way, and any other bit is `x`.
+///
+/// So `o`, `p` and `x` do not say which bit was set: the raw value is `sh_flags`.
+pub fn sh_flags_letters(flags: u64, machine: u16, osabi: u8) -> String {
+    let gnu = matches!(osabi, ELFOSABI_GNU | ELFOSABI_FREEBSD);
     let mut rest = flags;
     let mut out = String::new();
-    for &(bit, ch) in LETTERS {
-        if flags & bit != 0 {
-            out.push(ch);
-            rest &= !bit;
-        }
+    while rest != 0 {
+        let flag = rest & rest.wrapping_neg();
+        rest &= !flag;
+        let letter = match flag {
+            SHF_WRITE => 'W',
+            SHF_ALLOC => 'A',
+            SHF_EXECINSTR => 'X',
+            SHF_MERGE => 'M',
+            SHF_STRINGS => 'S',
+            SHF_INFO_LINK => 'I',
+            SHF_LINK_ORDER => 'L',
+            SHF_OS_NONCONFORMING => 'O',
+            SHF_GROUP => 'G',
+            SHF_TLS => 'T',
+            SHF_EXCLUDE => 'E',
+            SHF_COMPRESSED => 'C',
+            SHF_X86_64_LARGE if matches!(machine, EM_X86_64 | EM_L1OM | EM_K1OM) => 'l',
+            SHF_ARM_PURECODE if machine == EM_ARM => 'y',
+            SHF_PPC_VLE if machine == EM_PPC => 'v',
+            SHF_GNU_RETAIN if gnu => 'R',
+            SHF_GNU_MBIND if gnu || osabi == ELFOSABI_NONE => 'D',
+            _ if flag & SHF_MASKOS != 0 => {
+                rest &= !SHF_MASKOS;
+                'o'
+            }
+            _ if flag & SHF_MASKPROC != 0 => {
+                rest &= !SHF_MASKPROC;
+                'p'
+            }
+            _ => 'x',
+        };
+        out.push(letter);
     }
-    if machine == EM_X86_64 && flags & SHF_X86_64_LARGE != 0 {
-        out.push('l');
-        rest &= !SHF_X86_64_LARGE;
-    }
-    (rest == 0).then_some(out)
+    out
 }
 
 // ---- Symbols --------------------------------------------------------------
@@ -747,4 +780,109 @@ fn arm_reloc_name(r_type: u32) -> Option<&'static str> {
         160 => "R_ARM_IRELATIVE",
         _ => return None,
     })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const WA: u64 = SHF_WRITE | SHF_ALLOC;
+    const SOLARIS: u8 = 6;
+
+    #[test]
+    fn generic_flags_in_bit_order() {
+        let all = SHF_WRITE
+            | SHF_ALLOC
+            | SHF_EXECINSTR
+            | SHF_MERGE
+            | SHF_STRINGS
+            | SHF_INFO_LINK
+            | SHF_LINK_ORDER
+            | SHF_OS_NONCONFORMING
+            | SHF_GROUP
+            | SHF_TLS
+            | SHF_COMPRESSED
+            | SHF_EXCLUDE;
+        assert_eq!(
+            sh_flags_letters(all, EM_X86_64, ELFOSABI_NONE),
+            "WAXMSILOGTCE"
+        );
+        assert_eq!(sh_flags_letters(0, EM_X86_64, ELFOSABI_NONE), "");
+    }
+
+    #[test]
+    fn retain_is_named_only_for_gnu_and_freebsd() {
+        let f = WA | SHF_GNU_RETAIN;
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_GNU), "WAR");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_FREEBSD), "WAR");
+        // Ubuntu 24.04's /bin/cat: a System V file with a retained section.
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_NONE), "WAo");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, SOLARIS), "WAo");
+    }
+
+    #[test]
+    fn mbind_is_named_for_system_v_too() {
+        let f = SHF_ALLOC | SHF_GNU_MBIND;
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_GNU), "AD");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_NONE), "AD");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, SOLARIS), "Ao");
+    }
+
+    #[test]
+    fn one_o_covers_the_whole_os_range() {
+        // On System V the lower bit (retain) is an `o`, which ends the OS range,
+        // so mbind is not shown either.
+        let f = SHF_GNU_RETAIN | SHF_GNU_MBIND;
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_NONE), "o");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_GNU), "RD");
+        assert_eq!(
+            sh_flags_letters(0x0010_0000 | 0x0040_0000, EM_X86_64, ELFOSABI_GNU),
+            "o"
+        );
+    }
+
+    #[test]
+    fn machine_specific_flags() {
+        assert_eq!(
+            sh_flags_letters(SHF_ALLOC | SHF_X86_64_LARGE, EM_X86_64, 0),
+            "Al"
+        );
+        assert_eq!(
+            sh_flags_letters(SHF_ALLOC | SHF_X86_64_LARGE, EM_K1OM, 0),
+            "Al"
+        );
+        assert_eq!(
+            sh_flags_letters(SHF_EXECINSTR | SHF_ARM_PURECODE, EM_ARM, 0),
+            "Xy"
+        );
+        assert_eq!(
+            sh_flags_letters(SHF_EXECINSTR | SHF_PPC_VLE, EM_PPC, 0),
+            "Xv"
+        );
+        // The same bit on another machine is processor-specific without a name.
+        assert_eq!(
+            sh_flags_letters(SHF_ALLOC | 0x1000_0000, EM_AARCH64, 0),
+            "Ap"
+        );
+    }
+
+    #[test]
+    fn one_p_covers_the_whole_processor_range() {
+        // A lower unnamed processor bit hides `E`, as in readelf.
+        let f = 0x1000_0000 | SHF_EXCLUDE;
+        assert_eq!(sh_flags_letters(f, EM_AARCH64, ELFOSABI_NONE), "p");
+        assert_eq!(sh_flags_letters(f, EM_X86_64, ELFOSABI_NONE), "lE");
+    }
+
+    #[test]
+    fn unknown_generic_bits_are_x() {
+        assert_eq!(
+            sh_flags_letters(SHF_ALLOC | 0x8, EM_X86_64, ELFOSABI_NONE),
+            "Ax"
+        );
+        assert_eq!(
+            sh_flags_letters(0x1000 | 0x2000, EM_X86_64, ELFOSABI_NONE),
+            "xx"
+        );
+    }
 }
