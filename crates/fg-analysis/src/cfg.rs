@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Recursive-descent CFG recovery (design §8.1).
 //!
 //! Starting from every accepted `IsFunction` fact, each function's blocks are

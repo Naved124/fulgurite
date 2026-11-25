@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use or refer to this software, please cite it as below."
+title: "Fulgurite: a disassembler and decompiler whose guesses are visible, explainable and reversible"
+type: software
+authors:
+  - given-names: "MD Naved Raja"
+    family-names: "Khan"
+    orcid: "https://orcid.org/0009-0004-0426-2822"
+repository-code: "https://github.com/Naved124/fulgurite"
+url: "https://navedkhan.dev/"
+abstract: >-
+  A reverse-engineering tool for x86-64 and AArch64 ELF and PE binaries that
+  attaches a calibrated confidence and its evidence to every claim it makes,
+  can explain any result, and lets the user reject an inference so it stays
+  rejected. It includes hardened ELF and PE loaders, an x86 decoder, an
+  AArch64 decoder generated from Arm's machine-readable specification, a fact
+  store with confidence and evidence, function and control-flow recovery, and
+  cross-references, checked against readelf, objdump and llvm-mc oracles, and
+  a scorer that compares its function recovery with existing disassemblers.
+keywords:
+  - reverse engineering
+  - disassembler
+  - decompiler
+  - binary analysis
+  - function recovery
+  - elf
+  - pe
+  - x86-64
+  - aarch64
+license: Apache-2.0

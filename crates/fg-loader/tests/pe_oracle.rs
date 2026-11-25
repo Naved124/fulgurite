@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Cross-checks the PE loader against independent implementations:
 //!
 //! * `llvm-readobj` (LLVM's COFF dumper) for every parsed value: file, optional

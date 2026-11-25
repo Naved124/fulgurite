@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Program headers (`Elf32_Phdr` / `Elf64_Phdr`): what the OS loader maps.
 
 use super::consts::{PF_R, PF_W, PF_X, p_type_name};

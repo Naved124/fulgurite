@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Disassembly listings.
 //!
 //! M0 produces a linear sweep of code regions, the same view as `objdump -d`, but

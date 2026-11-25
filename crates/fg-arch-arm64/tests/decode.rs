@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Decoder semantics: text, tokens, control flow, memory operands, errors.
 #![allow(missing_docs)]
 

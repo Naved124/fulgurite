@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Function recovery for a session: the seed pass and CFG recovery, with each
 //! function's confidence, where it came from and why.
 

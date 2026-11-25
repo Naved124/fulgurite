@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Evidence: the human-readable, clickable reason behind a verdict.
 //!
 //! In later milestones this is the `evidence` list of a Fact (see the design

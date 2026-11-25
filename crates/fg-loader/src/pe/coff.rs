@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! COFF symbol table and string table. Images keep them only when built by
 //! MinGW-style toolchains without stripping; the Windows loader never reads them.
 

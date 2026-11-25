@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Bounds-checked access to untrusted bytes.
 //!
 //! Every read of input data in Fulgurite goes through [`ByteView`]. Offsets and

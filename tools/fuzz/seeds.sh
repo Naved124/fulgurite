@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 # Builds seed corpora for the fuzz targets in fuzz/corpus/<target>/ (not committed:
 # see .gitignore). Seeds are real files up to 1 MB:
 #   - ELF files from the system (MAX_SYSTEM of them),

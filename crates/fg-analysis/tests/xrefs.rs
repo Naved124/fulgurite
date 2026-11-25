@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Cross-references checked against the linker's own record of them: built
 //! with `--emit-relocs`, a program keeps its code relocations (`.rela.text`),
 //! and each one says which instruction refers to which address.

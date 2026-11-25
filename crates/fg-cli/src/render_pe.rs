@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Human-readable output for PE files. Same conventions as `render`: every value
 //! is followed by `@offset`, the file bytes it came from.
 

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Malformed and hostile PE files: every anomaly the PE loader can report is
 //! triggered here, and the last test checks that none is left untested.
 

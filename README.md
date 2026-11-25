@@ -119,6 +119,14 @@ docs                design document and progress notes
 
 ## Licence
 
-Proprietary. Copyright © 2026 Naved. All rights reserved.
-No licence is granted to use, copy, modify or distribute this repository's contents.
-The licensing model (e.g. open core) will be decided before any public release.
+Copyright 2026 MD Naved Raja Khan. Licensed under the [Apache License, Version 2.0](LICENSE).
+
+The AArch64 decoder tables (`crates/fg-arch-arm64/src/tables.rs`) are generated from
+Arm's A-profile Machine Readable Specification and keep its BSD-3-Clause notice, so
+the `fg-arch-arm64` crate is `Apache-2.0 AND BSD-3-Clause`. See [`NOTICE`](NOTICE).
+Every source file names its licence in an SPDX header.
+
+## Citing
+
+If you use or refer to Fulgurite, please cite it as described in
+[`CITATION.cff`](CITATION.cff) (GitHub's "Cite this repository" button reads it).

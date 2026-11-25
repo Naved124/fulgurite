@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Assembler templates to tokens.
 
 use crate::helpers::{decode_bit_masks, fp_imm};

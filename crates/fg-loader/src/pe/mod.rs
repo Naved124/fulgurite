@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! PE loader (Windows executables and DLLs, UEFI images).
 //!
 //! Supports PE32 and PE32+ for every machine type, so later architectures need

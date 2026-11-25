@@ -1,5 +1,9 @@
-#![no_main]
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Any byte string must load or fail cleanly: no panics, no hangs.
+
+#![no_main]
 
 use libfuzzer_sys::fuzz_target;
 

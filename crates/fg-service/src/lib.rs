@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The service layer.
 //!
 //! Every front end (the `fulg` CLI today; the GUI, Python bindings and the

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! What an instruction does to registers and flags ([`Effect`]), read from
 //! the encoding's fields.
 //!

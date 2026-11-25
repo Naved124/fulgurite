@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Confidence: how much a fact is believed, and how evidence combines
 //! (design document, section 12).
 

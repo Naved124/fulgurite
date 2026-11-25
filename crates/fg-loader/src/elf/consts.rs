@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! ELF constants (System V gABI, plus the GNU extensions seen on Linux).
 #![allow(missing_docs)]
 

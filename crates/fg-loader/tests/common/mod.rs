@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Test helper: builds small synthetic ELF files, correct or deliberately broken.
 #![allow(dead_code, missing_docs)]
 

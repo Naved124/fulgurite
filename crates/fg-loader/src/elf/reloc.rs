@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Relocation tables: `REL`, `RELA` and packed `RELR`.
 //!
 //! In loaded files (executables, shared objects) the tables are found the way

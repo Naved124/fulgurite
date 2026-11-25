@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The fact: one claim about the program, with who made it, how sure it is, and
 //! why (design document, sections 4.2 and 4.3).
 

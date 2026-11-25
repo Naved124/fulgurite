@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Development aid: reads 32-bit words (hex, one per line) and prints
 //! `word<TAB>encoding<TAB>text` for each (`<invalid>` for words that do not
 //! decode). Instructions are placed at address 0, so targets read as offsets.

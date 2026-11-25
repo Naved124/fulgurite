@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! ELF loader.
 //!
 //! Supports ELF32 and ELF64 in both byte orders, so later architectures need no

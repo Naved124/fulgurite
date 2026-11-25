@@ -1,10 +1,15 @@
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 [package]
 name = "fg-arch-arm64"
 description = "Fulgurite's AArch64 module: a decoder and formatter generated from Arm's machine-readable specification, behind the Arch trait."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
-license.workspace = true
+# Apache-2.0 for the hand-written code; src/tables.rs is generated from Arm's
+# BSD-3-Clause machine-readable specification.
+license = "Apache-2.0 AND BSD-3-Clause"
 publish.workspace = true
 repository.workspace = true
 

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! DOS header, Rich header, COFF file header and optional header.
 
 use super::consts::*;

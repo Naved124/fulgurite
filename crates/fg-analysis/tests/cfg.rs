@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Function-start recovery on stripped binaries, scored against the symbols
 //! the stripping removed: the test program itself, and a C program built here
 //! with gcc and clang at -O2, with and without unwind tables.

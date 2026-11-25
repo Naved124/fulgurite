@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The seed pass on a real binary: this test program itself (an ELF with
 //! symbols and `.eh_frame` when built on Linux).
 

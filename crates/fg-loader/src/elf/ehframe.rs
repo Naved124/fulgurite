@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! `.eh_frame` and `.eh_frame_hdr`: the unwind tables every C++ exception and
 //! every stack trace depends on (Linux Standard Base, "Exception Frames";
 //! DWARF 4 §6.4.1 for the record layout). Each FDE names the code range it

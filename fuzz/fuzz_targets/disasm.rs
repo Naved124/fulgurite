@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Fuzzes the x86 and AArch64 decoders and the disassembly listing: raw bytes
 //! in every x86 mode and as A64 words, then the input as a whole file (loaded,
 //! then every code section listed). Nothing may panic, whatever the bytes.

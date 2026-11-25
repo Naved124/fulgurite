@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Oracle tests: compare the loader against independent tools on real binaries.
 //!
 //! * `readelf` (GNU binutils) for every parsed value: file type, entry point,

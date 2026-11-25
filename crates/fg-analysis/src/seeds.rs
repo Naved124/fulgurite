@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The seed pass: what the file itself declares about code, as facts
 //! (design §8.2).
 //!

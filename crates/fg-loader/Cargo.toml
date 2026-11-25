@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 [package]
 name = "fg-loader"
 description = "Fulgurite binary loaders: turn untrusted ELF (and later PE) bytes into a format-neutral model with byte-level provenance."

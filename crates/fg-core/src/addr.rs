@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Address newtypes. A virtual address and a file offset are both `u64`, but
 //! mixing them up is one of the most common loader bugs, so they are distinct types.
 

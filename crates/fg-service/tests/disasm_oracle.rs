@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Cross-checks the disassembly listing against GNU `objdump -d -M intel`.
 //!
 //! For every instruction objdump prints, the listing must have an instruction at

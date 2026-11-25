@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! The cache gives back exactly the store it was given, and refuses anything
 //! that is not a store Fulgurite could have written.
 

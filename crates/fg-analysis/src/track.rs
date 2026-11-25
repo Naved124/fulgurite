@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Following register values along one path of instructions, symbolically,
 //! far enough to read a jump table (design §8.3) without a lifter.
 //!

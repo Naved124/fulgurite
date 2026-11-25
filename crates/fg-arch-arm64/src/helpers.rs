@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Functions of Arm's pseudocode that the generated tables call: alias
 //! preferences, logical immediates, floating-point immediates, system
 //! instruction kinds. Written from the pseudocode in the A64 ISA release.

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Decoder semantics: exact control flow, memory operands, immediates, text and
 //! error kinds for chosen encodings, then sweeps over the opcode space and over
 //! random bytes that check the invariants every caller relies on.

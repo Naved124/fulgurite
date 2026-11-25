@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 # Builds the function-recovery corpus for M1 step 8: open-source programs
 # compiled with many compilers and flags, every binary kept three ways:
 #

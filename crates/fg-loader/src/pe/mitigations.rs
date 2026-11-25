@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Exploit-mitigation verdicts for PE images, each with the evidence it rests on.
 
 use super::consts::*;

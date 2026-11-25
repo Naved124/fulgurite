@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+# SPDX-License-Identifier: Apache-2.0
+
 # Coverage-guided fuzzing with cargo-fuzz (needs a nightly toolchain):
 #   cargo install cargo-fuzz
 #   cargo +nightly fuzz run load      # loaders
@@ -10,6 +13,7 @@
 name = "fulgurite-fuzz"
 version = "0.0.0"
 edition = "2024"
+license = "Apache-2.0"
 publish = false
 
 [package.metadata]

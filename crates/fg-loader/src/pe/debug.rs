@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Debug directory: where the PDB is, reproducibility hashes, CET marking.
 
 use super::consts::*;

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Function-start recall and precision on a binary with symbols, analysed as
 //! `strip` would leave it (no static symbol table): `cargo run -p fg-analysis --example recall -- FILE...`.
 //! Ground truth: defined function symbols in executable memory, except

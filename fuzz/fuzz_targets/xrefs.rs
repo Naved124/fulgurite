@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Fuzzes cross-references: the input is loaded as a file, its functions
 //! recovered, then every reference listed and named. Nothing may panic,
 //! whatever the bytes.

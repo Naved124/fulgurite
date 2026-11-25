@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Malformed and hostile inputs: the loader must report anomalies, never panic.
 
 mod common;

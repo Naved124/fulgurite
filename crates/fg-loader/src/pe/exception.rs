@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Exception directory (`.pdata`): one `RUNTIME_FUNCTION` per function that
 //! needs unwinding, with the unwind data that describes its prologue.
 

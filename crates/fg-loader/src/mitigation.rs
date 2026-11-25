@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2026 MD Naved Raja Khan
+// SPDX-License-Identifier: Apache-2.0
+
 //! Exploit-mitigation verdicts. Every verdict carries the evidence it was based
 //! on, so "how was this detected?" always has an answer (design section 6.5).
 
